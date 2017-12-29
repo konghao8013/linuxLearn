@@ -1,0 +1,37 @@
+
+1、  首先，要确保CentOS7安装了  openssh-server，在终端中输入  yum list installed | grep openssh-server
+
+此处显示已经安装了  openssh-server，如果又没任何输出显示表示没有安装  openssh-server，通过输入  yum install openssh-server
+
+来进行安装openssh-server
+
+2、找到文件/etc/ssh/sshd_config vi修改
+取消
+port 22 #
+PermitRootLogin yes #
+PasswordAuthentcation yes #
+开启  sshd  服务，输入 sudo service sshd start
+检查  sshd  服务是否已经开启，输入ps -e | grep sshd
+netstat -an | grep 22  
+
+
+CentOS7用yum安装软件提示 cannot find a valid baseurl for repobase7x86_64
+
+　1、打开 vi /etc/sysconfig/network-scripts/ifcfg-enp4s0（每个机子都可能不一样，但格式会是“ifcfg-e...”）。但内容包含：
+[html] view plain copy 
+<strong>TYPE=Ethernet #网卡类型   
+DEVICE=eth0 #网卡接口名称   
+ONBOOT=no #系统启动时是否自动加载   
+BOOTPROTO=static #启用地址协议 --static:静态协议 --bootp协议 --dhcp协议   
+IPADDR=192.168.1.11 #网卡IP地址   
+NETMASK=255.255.255.0 #网卡网络地址   
+GATEWAY=192.168.1.1 #网卡网关地址   
+HWADDR=00:0C:29:13:5D:74 #网卡设备MAC地址   
+BROADCAST=192.168.1.255 #网卡广播地址</strong>  
+修改内容如下：
+[html] view plain copy 
+ONBOOT=yes  
+NM_CONTROLLED=no  
+BOOTPROTO=dhcp  
+DNS1=8.8.8.8  
+DNS2=4.2.2.2 

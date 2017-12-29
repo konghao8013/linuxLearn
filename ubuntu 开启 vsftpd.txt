@@ -1,0 +1,21 @@
+所有操作都是在 sudo su 下： 
+安装： 
+$ sudo su 进入 # 
+# apt-get install vsftpd 
+# ps -e | grep ftp   #查看是否启动
+
+安装完毕后或许会自动生成一个帐户”ftp”，/home下也会增加一个文件夹。
+如果没有生成这个用户的话可以手动来，生成了就不用了：
+代码: 
+sudo useradd -m ftp
+sudo passwd ftp
+有”ftp”帐户后还要更改权限
+代码: 
+sudo chmod 777 /home/ftp 
+/etc/vsftpd.conf
+write_enable=YES
+local_enable=Yes
+anoymous_enable=NO
+
+启动服务
+systemctl start vsftpd.service  
