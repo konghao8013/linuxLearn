@@ -1,0 +1,12 @@
+
+--------------------------------后台运行jar程序
+nohup java -jar shareniu.jar & 后台运行程序
+ps -aux|grep chat.js  查看nohub后台运行程序
+ps -aux|grep chat.js| grep -v grep | awk '{print $2}' 获取进程ID
+查看对应 占用端口进程ID lsof -i:8090
+kill -9 pid结束进程
+
+
+shutdown、halt、reboot
+
+----------------------

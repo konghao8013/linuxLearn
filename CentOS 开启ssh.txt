@@ -35,3 +35,4 @@ NM_CONTROLLED=no
 BOOTPROTO=dhcp  
 DNS1=8.8.8.8  
 DNS2=4.2.2.2 
+ÖØÆô·þÎñ service network restart

@@ -1,0 +1,104 @@
+
+
+1. 首先安装vsftpd
+ 命令:yum -y install vsftpd
+ 之后开启服务:service vsftpd start
+ 
+
+2.关闭防火墙
+    1) 重启后生效 
+        开启: chkconfig iptables on 
+        关闭: chkconfig iptables off 
+    2) 即时生效,重启后失效 
+        开启: service iptables start 
+        关闭: service iptables stop
+ 
+
+3.默认情况下vsftp是不允许root用户登录的，可以通过修改限制来解决这个问题。
+复制代码
+首先找到vsftp的配置目录
+[root@localhost vsftpd]# pwd
+/etc/vsftpd
+[root@localhost vsftpd]# ls
+chroot_list  ftpusers  user_list  vsftpd.conf  vsftpd_conf_migrate.sh
+[root@localhost vsftpd]#
+
+修改
+[root@localhost vsftpd]# cat ftpusers
+# Users that are not allowed to login via ftp
+#root
+bin
+daemon
+adm
+lp
+sync
+shutdown
+halt
+mail
+news
+uucp
+operator
+games
+nobody
+
+修改
+[root@localhost vsftpd]# cat user_list
+# vsftpd userlist
+# If userlist_deny=NO, only allow users in this file
+# If userlist_deny=YES (default), never allow users in this file, and
+# do not even prompt for a password.
+# Note that the default vsftpd pam config also checks /etc/vsftpd/ftpusers
+# for users that are denied.
+#root
+bin
+daemon
+adm
+lp
+sync
+shutdown
+halt
+mail
+news
+uucp
+operator
+games
+nobody
+
+上面这个两个就是默认情况下vsftp不允许使用的账号列表，讲文件中root删除，或者前面加个#号 重启一下vsftpd 服务 即可
+复制代码
+ 
+
+4.将 /etc/selinux/config 中的enforcing 模式改为disabled, 然后重启[重点，不设置该项目无法新建文件夹]
+
+
+
+
+
+
+1. 首先安装vsftpd
+ 命令:yum -y install vsftpd
+ 之后开启服务:service vsftpd start
+查询端口是否启用 firewall-cmd --query-port=21/tcp
+添加端口到防火墙 firewall-cmd --add-port=21/tcp
+添加fpt到防火墙 firewall-cmd --permanent --zone=public --add-service=ftp  
+firewall-cmd --reload  
+禁用ip6地址
+telnet 21端口能否成功
+nmap 127.0.0.1 查看本地端口使用情况
+
+下面开始正题，开机默认VSFTP服务自动启动:
+方法一-常用方便的方法
+[root@localhost /]# chkconfig --list|grep vsftpd
+vsftpd          0:off   1:off   2:off   3:off   4:off   5:off   6:off
+上面显示vsftpd 在linux任何工作等级下都没有自启动
+[root@localhost /]# chkconfig vsftpd on
+上面这条命令设置vsftpd自启动
+[root@localhost /]# chkconfig --list|grep vsftpd
+vsftpd          0:off   1:off   2:on    3:on    4:on    5:on    6:off
+上面显示表明vsftpd在Linux工作2,3,4,5等级下都会自启动服务。
+
+方法二- 修改rc.local文件1:
+修改文件 /etc/rc.local , 把行/usr/local/sbin/vsftpd & 插入文件中，以实现开机自动启动。
+方法三-修改rc.local文件2：
+修改/etc/rc.local,加入/etc/rc.d/init.d/vsftpd  start
+    上面就是为大家介绍的linux中vsftpd自启动（开机启动）的三种方法，希望对大家有帮助
