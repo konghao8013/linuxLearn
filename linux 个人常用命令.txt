@@ -1,0 +1,16 @@
+1.解压tar.gz那个文件
+命令：tar -zxf 文件名
+2.移动文件
+mv /home/konghao/upfiles/Java/jdk1.8.0_151 /home/konghao/app
+3 后台运行程序
+--------------------------------后台运行jar程序
+nohup java -jar shareniu.jar & 后台运行程序
+ps -aux|grep chat.js  查看nohub后台运行程序
+ps -aux|grep chat.js| grep -v grep | awk '{print $2}' 获取进程ID
+查看对应 占用端口进程ID lsof -i:8090
+kill -9 pid结束进程
+
+
+------------------------------------------
+yum install appName ubuntu
+apt-get install appName Centos
