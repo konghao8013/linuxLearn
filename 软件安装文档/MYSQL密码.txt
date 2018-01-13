@@ -1,0 +1,6 @@
+wkwwR*g!g1iI
+
+-v  -v -v yourdatabase -e "select * from mysql.users" |grep -i rows
+
+ ALTER USER 'root'@'localhost' IDENTIFIED BY 'Abc123...';
+GRANT ALL PRIVILEGES ON *.* TO 'konghao'@'%' IDENTIFIED BY 'Abc123...' WITH GRANT OPTION;
