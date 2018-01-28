@@ -1,0 +1,3 @@
+设置 rc.local 运行权限，chmod 755 
+ /etc/rc.d/rc.local
+添加需要运行的脚本命令
