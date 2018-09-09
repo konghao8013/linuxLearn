@@ -270,4 +270,11 @@ echo [选项] [输出内容]
 
 cat /etc/shells 查看当前支持的shells
 echo $SHELL查看当前的SHELL
-
+删除 yum 包
+yum remove xx
+删除安装包
+rpm -e subversion-libs-1.7.14-7.el7_0.x86_64
+查看端口
+netstat -lntp 
+查看程序安装路劲
+which 

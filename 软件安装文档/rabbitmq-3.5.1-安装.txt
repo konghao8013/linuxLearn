@@ -42,11 +42,11 @@ RabbitMQ－Server：3.5.1
 五、设置RabbitMQ远程ip登录
 这里我们以创建个agan帐号，密码123456为例，创建一个账号并支持远程ip访问。
 1.创建账号
-	rabbitmqctl add_user agan 123456
+	rabbitmqctl add_user konghao 123456
 2.设置用户角色
-	rabbitmqctl  set_user_tags  agan  administrator
+	rabbitmqctl  set_user_tags  konghao  administrator
 3.设置用户权限
-	rabbitmqctl set_permissions -p "/" agan ".*" ".*" ".*"
+	rabbitmqctl set_permissions -p "/" konghao ".*" ".*" ".*"
 4.设置完成后可以查看当前用户和角色(需要开启服务)
 	rabbitmqctl list_users
 	
